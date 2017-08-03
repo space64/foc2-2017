@@ -85,8 +85,11 @@ public class Ex1_T123456_Huyen extends JFrame{
 				char[] passArray = txtPassword.getPassword();
 				String password = new String(passArray);
 				if(userName.equals("admin") && password.equals("root")){
-					JOptionPane.showMessageDialog(Ex1_T123456_Huyen.this, 
-							"Hello "+userName);
+//					JOptionPane.showMessageDialog(Ex1_T123456_Huyen.this, 
+//							"Hello "+userName);
+					MainWindow mainGUI = new MainWindow();
+					mainGUI.setVisible(true);
+					Ex1_T123456_Huyen.this.setVisible(false);
 				}else{
 					JOptionPane.showMessageDialog(Ex1_T123456_Huyen.this, 
 							"Fail :(");
