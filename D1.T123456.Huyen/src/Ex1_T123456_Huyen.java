@@ -122,6 +122,7 @@ public class Ex1_T123456_Huyen extends JFrame{
 		Ex1_T123456_Huyen gui =
 			new Ex1_T123456_Huyen();
 		gui.setVisible(true);
+//		gui.setSize(300, 300);
 		gui.setDefaultCloseOperation(
 			JFrame.EXIT_ON_CLOSE);
 	}
