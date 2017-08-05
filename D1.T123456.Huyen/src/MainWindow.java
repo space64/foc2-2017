@@ -16,7 +16,7 @@ import java.awt.event.ActionEvent;
 public class MainWindow extends JFrame {
 
 	private JDesktopPane contentPane;
-
+	private int windowCount = 0;
 
 	/**
 	 * Create the frame.
@@ -24,34 +24,38 @@ public class MainWindow extends JFrame {
 	public MainWindow() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
-		
+
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
-		
+
 		JMenu mnFile = new JMenu("File");
 		menuBar.add(mnFile);
-		
+
 		JMenuItem mntmNew = new JMenuItem("New");
 		mnFile.add(mntmNew);
-		
+
 		JMenuItem mntmOpen = new JMenuItem("Open");
 		mnFile.add(mntmOpen);
-		
+
 		JMenuItem mntmSave = new JMenuItem("Save");
 		mnFile.add(mntmSave);
 		
+		JMenuItem mntmCloseAll = new JMenuItem("Close All");
+	
+		mnFile.add(mntmCloseAll);
+
 		JSeparator separator = new JSeparator();
 		mnFile.add(separator);
-		
+
 		JMenuItem mntmExit = new JMenuItem("Exit");
 		mnFile.add(mntmExit);
-		
+
 		JMenu mnEdit = new JMenu("Edit");
 		menuBar.add(mnEdit);
-		
+
 		JMenu mnTools = new JMenu("Tools");
 		menuBar.add(mnTools);
-		
+
 		JMenu mnHelp = new JMenu("Help");
 		menuBar.add(mnHelp);
 		contentPane = new JDesktopPane();
@@ -59,18 +63,22 @@ public class MainWindow extends JFrame {
 		contentPane.setLayout(null);
 		setContentPane(contentPane);
 		setExtendedState(JFrame.MAXIMIZED_BOTH);
-		
+
 		// Xu ly su kien
 		mntmNew.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				JInternalFrame newWindow = 
-						new JInternalFrame("New Window 1", 
-								true, true, true);
+
+				JInternalFrame newWindow = new JInternalFrame("New Window " + (windowCount + 1), true, true, true);
 				newWindow.setVisible(true);
 				newWindow.setSize(300, 300);
+				newWindow.setLocation(windowCount * 30, windowCount * 30);
 				contentPane.add(newWindow);
+				newWindow.moveToFront();
+				windowCount++;
 			}
 		});
+		
+		
 	}
 
 }
