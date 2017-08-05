@@ -1,7 +1,11 @@
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
+import javax.swing.JDesktopPane;
 import javax.swing.JFrame;
+import javax.swing.JInternalFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JMenuBar;
@@ -10,23 +14,7 @@ import javax.swing.JMenuItem;
 
 public class MainWindow extends JFrame {
 
-	private JPanel contentPane;
-
-	/**
-	 * Launch the application.
-	 */
-//	public static void main(String[] args) {
-//		EventQueue.invokeLater(new Runnable() {
-//			public void run() {
-//				try {
-//					MainWindow frame = new MainWindow();
-//					frame.setVisible(true);
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		});
-//	}
+	private JDesktopPane contentPane;
 
 	/**
 	 * Create the frame.
@@ -43,11 +31,23 @@ public class MainWindow extends JFrame {
 		
 		JMenuItem mntmNew = new JMenuItem("New");
 		mnFile.add(mntmNew);
-		contentPane = new JPanel();
+		contentPane = new JDesktopPane();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		contentPane.setLayout(new BorderLayout(0, 0));
+		contentPane.setLayout(null);
 		setContentPane(contentPane);
 		setExtendedState(JFrame.MAXIMIZED_BOTH);
+		
+		mntmNew.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				JInternalFrame newWindow = new JInternalFrame("New Window", true, true, true);
+				newWindow.setSize(200, 200);
+				newWindow.setVisible(true);
+				contentPane.add(newWindow);
+				
+			}
+		});
 	}
 
 }

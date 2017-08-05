@@ -1,19 +1,22 @@
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JTextField;
-import javax.swing.JPasswordField;
-import javax.swing.JCheckBox;
-import javax.swing.JButton;
-import javax.swing.SwingConstants;
-
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.SystemColor;
-import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 
 public class Ex1_T123456_Huyen extends JFrame{
 	//Field - Instance Variable
@@ -46,6 +49,30 @@ public class Ex1_T123456_Huyen extends JFrame{
 			}
 			
 		});
+		txtUserName.addKeyListener(new KeyListener() {
+			
+			@Override
+			public void keyTyped(KeyEvent e) {
+//				char c = e.getKeyChar();
+//				if(c < '0' || c > '9'){
+//					getToolkit().beep();
+//					e.consume();
+//				}
+				
+			}
+			
+			@Override
+			public void keyReleased(KeyEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void keyPressed(KeyEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
 		txtUserName.setLocation(30, 72);
 		txtUserName.setSize(150, 20);
 		//Add to JFrame
@@ -70,6 +97,16 @@ public class Ex1_T123456_Huyen extends JFrame{
 			
 			
 		});
+		txtPassword.addKeyListener(new KeyAdapter() {
+			
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if(e.getKeyCode() == KeyEvent.VK_ENTER){
+					login();
+				}
+				
+			}
+		});
 		txtPassword.setBounds(30, 126, 150, 20);
 		getContentPane().add(txtPassword);
 		
@@ -81,19 +118,7 @@ public class Ex1_T123456_Huyen extends JFrame{
 		JButton btnLogin = new JButton("Login");
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				String userName = txtUserName.getText();
-				char[] passArray = txtPassword.getPassword();
-				String password = new String(passArray);
-				if(userName.equals("admin") && password.equals("root")){
-//					JOptionPane.showMessageDialog(Ex1_T123456_Huyen.this, 
-//							"Hello "+userName);
-					MainWindow mainGUI = new MainWindow();
-					mainGUI.setVisible(true);
-					Ex1_T123456_Huyen.this.setVisible(false);
-				}else{
-					JOptionPane.showMessageDialog(Ex1_T123456_Huyen.this, 
-							"Fail :(");
-				}
+				login();
 			}
 		});
 		btnLogin.setBounds(72, 198, 89, 23);
@@ -113,5 +138,21 @@ public class Ex1_T123456_Huyen extends JFrame{
 		gui.setVisible(true);
 		gui.setDefaultCloseOperation(
 			JFrame.EXIT_ON_CLOSE);
+	}
+
+	private void login() {
+		String userName = txtUserName.getText();
+		char[] passArray = txtPassword.getPassword();
+		String password = new String(passArray);
+		if(userName.equals("admin") && password.equals("root")){
+//					JOptionPane.showMessageDialog(Ex1_T123456_Huyen.this, 
+//							"Hello "+userName);
+			MainWindow mainGUI = new MainWindow();
+			mainGUI.setVisible(true);
+			Ex1_T123456_Huyen.this.setVisible(false);
+		}else{
+			JOptionPane.showMessageDialog(Ex1_T123456_Huyen.this, 
+					"Fail :(");
+		}
 	}
 }
